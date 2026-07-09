@@ -180,13 +180,18 @@ git push -u origin main
 `apt-get install`, and `rm -rf /var/lib/apt/lists/*` in a single line?
 What would happen to the image size if these were three separate `RUN` lines?
 
-> *Your answer:*
+> *Your answer:*They are combined into one RUN line to keep all temporary APT files inside a single image layer. When you run apt-get update, apt-get install, and rm -rf /var/lib/apt/lists/* in three separate RUN instructions, Docker creates three layers, and the large APT cache from the first two layers cannot be removed — it stays permanently in the image.
+
+This makes the final image much larger. Combining them into one RUN line ensures the cleanup happens before the layer is saved, keeping the image small and efficient.
 
 **Question 2.2:** `EXPOSE 80` in a Dockerfile does **not** actually open port
 80. What does it do, and what is required at `docker run` time to actually
 forward a port?
 
-> *Your answer:*
+> *Your answer:*EXPOSE 80 is only documentation inside the image — it tells Docker “this container intends to use port 80,” but it does not open or forward anything by itself.
+
+To actually make the port reachable from your host, you must specify a mapping at run time, for example:docker run -p 8080:80 …
+
 
 ---
 
