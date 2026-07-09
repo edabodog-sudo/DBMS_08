@@ -108,13 +108,17 @@ docker system df
 **Question 1.1:** The flag `-d` starts the container in detached mode.
 What happens without `-d`, and why is detached mode useful for a web server?
 
-> *Your answer:*
+> *Your answer:*Without -d, the container runs in the foreground, and its logs take over your terminal — you can’t type other commands until you stop it.
+
+Detached mode is useful for a web server because it keeps the server running in the background, letting you close the terminal, run other commands, or manage multiple services without interrupting the running application.
 
 **Question 1.2:** `-p 8080:80` maps host port 8080 to container port 80.
 Which port is the application actually listening on inside the container?
 What would `-p 9000:80` change?
 
-> *Your answer:*
+> *Your answer:*Inside the container, the application is actually listening on port 80 — that’s the container’s internal port.
+
+If you change it to -p 9000:80, the app still listens on port 80 inside the container, but you would reach it from your host at http://localhost:9000 instead of http://localhost:8080.
 
 ---
 
