@@ -240,13 +240,15 @@ docker exec -it pg psql -U postgres -c "SELECT * FROM test;"
 `postgres:16` still exists on your machine. Why does recreating a container
 from the same image not restore the data?
 
-> *Your answer:*
+> *Your answer:*Because a container is ephemeral — when you delete it, all data stored inside its filesystem disappears. The image (postgres:16) only contains the program PostgreSQL, not your database files.
+Re‑creating a container from the same image gives you a fresh, empty PostgreSQL instance, because the data was stored in the container’s writable layer, not in the image.
 
 **Question 3.2:** `docker stop` sends SIGTERM and waits for the process to
 exit cleanly. `docker kill` sends SIGKILL immediately. Why is `docker stop`
 preferred for a database container?
 
-> *Your answer:*
+> *Your answer:*docker stop is preferred because it gives PostgreSQL time to shut down cleanly, flush data to disk, close connections, and avoid corruption.
+docker kill forces an immediate SIGKILL, which can interrupt writes and leave the database in an inconsistent or damaged state.
 
 ---
 
