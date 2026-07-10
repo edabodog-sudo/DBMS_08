@@ -556,13 +556,16 @@ git push -u origin main
 starts before `api`. Does it guarantee that PostgreSQL is **ready to accept
 connections** when the API starts? What is the correct way to handle this?
 
-> *Your answer:*
+> *Your answer:*No, depends_on: postgres does not guarantee that PostgreSQL is ready.
+It only guarantees that the Postgres container starts first, but the database might still be loading and not ready for connections.Use a healthcheck so the API waits until PostgreSQL is healthy.
 
 **Question 6.2:** The `api` service uses `volumes: - ./api:/app` (a bind
 mount). What is the advantage of this during development compared to
-`COPY`-ing the code into an image at build time?
+`COPY`-ing the code into an image at build time? 
 
-> *Your answer:*
+
+> *Your answer:*Using a bind mount (./api:/app) means the code on your computer is directly visible inside the container.So when you change a file, the running container sees the change immediately — no rebuild needed.
+If you used COPY in the image, you would have to rebuild the image every time you change your code, which is slow and annoying during development.
 
 ---
 
