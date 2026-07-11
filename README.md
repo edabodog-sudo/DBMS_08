@@ -54,6 +54,8 @@ docker compose version
 > **Screenshot 1:** Take a screenshot showing both version outputs.
 >
 > `[insert screenshot]`
+> <img width="291" height="53" alt="Screenshot 1 juste" src="https://github.com/user-attachments/assets/91402134-f072-4417-bded-f3d863b74ff7" />
+
 
 ---
 
@@ -79,6 +81,8 @@ docker images
 > `docker images` output.
 >
 > `[insert screenshot]`
+> <img width="438" height="96" alt="Screenshot 2 juste" src="https://github.com/user-attachments/assets/e3b57cda-fa53-49aa-b235-b8a5ed907f60" />
+
 
 ### Step 2 – Run an nginx Webserver
 
@@ -165,6 +169,9 @@ exit
 > the commands run inside the container.
 >
 > `[insert screenshot]`
+> <img width="452" height="68" alt="Screenshot 3" src="https://github.com/user-attachments/assets/a5f97a61-014e-4bb3-a688-0eeb58586724" /><img width="457" height="116" alt="Screenshot 3a" src="https://github.com/user-attachments/assets/6043cb90-f957-4f0a-9a4e-71fed83eefd8" />
+
+
 
 ### Step 4 – Commit
 
@@ -232,7 +239,9 @@ docker exec -it pg psql -U postgres -c "SELECT * FROM test;"
 
 > **Screenshot 4:** Take a screenshot showing the error message.
 >
-> `[insert screenshot]`
+> `[insert screenshot]`,
+> <img width="587" height="43" alt="Screenshot 4" src="https://github.com/user-attachments/assets/8bdcc88c-90ab-44a7-b0a8-965e806676f0" />
+
 
 ### Questions for Section 3
 
@@ -299,6 +308,8 @@ docker volume inspect pg_data
 > container recreation, and the `docker volume inspect` output.
 >
 > `[insert screenshot]`
+> <img width="464" height="180" alt="Screenshot 5" src="https://github.com/user-attachments/assets/bf68ba66-736a-474c-8755-32b1bb72a7c4" />
+
 
 ### Step 3 – Clean Up
 
@@ -356,6 +367,8 @@ docker run --rm -it postgres:16 \
 > **Screenshot 6:** Take a screenshot showing the connection error.
 >
 > `[insert screenshot]`
+> <img width="447" height="99" alt="Screenshot 6" src="https://github.com/user-attachments/assets/69583c16-7961-46a1-bfd8-ccaa3082b1e2" />
+
 
 ### Step 2 – Fix It With a Custom Bridge Network
 
@@ -522,6 +535,8 @@ curl http://localhost:8000/studenten
 > `curl /` response.
 >
 > `[insert screenshot]`
+<img width="608" height="49" alt="Screenshot 7a" src="https://github.com/user-attachments/assets/842f41c5-d82f-48d3-82d4-5b8afe92391d" /><img width="463" height="32" alt="Screenshot 7b" src="https://github.com/user-attachments/assets/ad705d7b-9a0f-44a9-8df1-f91cc3248e34" />
+
 
 ### Step 5 – Observe Compose Networking
 
@@ -638,6 +653,8 @@ curl http://localhost:8000/studenten
 > with all four rows.
 >
 > `[insert screenshot]`
+> <img width="619" height="55" alt="Screenshot 8" src="https://github.com/user-attachments/assets/9889e1ab-4981-49d9-b5cc-3a955876c478" />
+
 
 ### Step 4 – Commit
 
@@ -760,6 +777,8 @@ git push
 > `.env` is not staged, and the working `curl` response.
 >
 > `[insert screenshot]`
+> <img width="292" height="94" alt="Screenshot 9" src="https://github.com/user-attachments/assets/bbbc7c70-2937-4d66-979d-8aff22456ca3" />
+
 
 ### Questions for Section 8
 
@@ -863,6 +882,9 @@ curl http://localhost:8000/studenten
 > final image size and the working `curl` response.
 >
 > `[insert screenshot]`
+> <img width="306" height="92" alt="Screenshot 10a" src="https://github.com/user-attachments/assets/37d3394c-68c7-41d3-b516-ab5b41b551ac" /><img width="443" height="29" alt="Screenshot 10b" src="https://github.com/user-attachments/assets/7a686a1a-9dc7-4734-92fb-3f1f85368603" />
+
+
 
 ### Step 5 – Commit
 
@@ -934,6 +956,8 @@ docker compose exec api whoami
 > returning `appuser`.
 >
 > `[insert screenshot]`
+> <img width="398" height="29" alt="Screenshot 11" src="https://github.com/user-attachments/assets/ce4d277d-60e1-4427-8142-0c0c89fa93f2" />
+
 
 ### Step 3 – Commit
 
