@@ -768,13 +768,20 @@ git push
 What is the standard practice to document which variables are required
 without committing the actual secrets?
 
-> *Your answer:*
+> *Your answer:*You should not commit the real .env file, because it contains secrets.
+But your teammate still needs to know which variables to create.Create a file called .env.example (or .env.template) and commit that to Git.It contains only the variable names, without real secrets:DB_HOST=
+DB_USER=
+DB_PASSWORD=
+API_KEY=
+
 
 **Question 8.2:** Even with `.env` excluded from git, the password is still
 stored in plain text on disk. Name one mechanism Docker provides for
 production-grade secret management that avoids plain-text env files entirely.
 
-> *Your answer:*
+> *Your answer:*Yes, .env is still plain text, so it’s not safe for production.
+Docker provides Docker Secrets, which store passwords in a secure, encrypted way instead of in a normal file.
+The secret is mounted into the container in a protected location, not as an environment variable.
 
 ---
 
@@ -871,13 +878,19 @@ git push
 environment from the builder stage. The final image does not contain `pip` or
 `uv`. What security advantage does this provide?
 
-> *Your answer:*
+> *Your answer:*Final image has no pip, no uv ,Attackers cannot install anything
+Smaller, safer, harder to abuse
+This is a common best practice:
+Builder stage = tools
+Final stage = only what is needed to run the app
 
 **Question 9.2:** The builder stage installs dependencies from `pyproject.toml`
 before copying the application code. Why does this ordering improve build
 cache efficiency when you frequently change only `main.py`?
 
-> *Your answer:*
+> *Your answer:*Dependencies installed first → cached
+Changing your code doesn’t break the cache
+Builds become much faster during development
 
 ---
 
@@ -935,13 +948,15 @@ git push
 **Question 10.1:** The `USER appuser` instruction is placed after
 `COPY . .`. Why would placing it *before* `COPY` cause a permission problem?
 
-> *Your answer:*
+> *Your answer:*USER appuser before COPY → appuser cannot write → permission error
+USER appuser after COPY → root copies files → no problem
 
 **Question 10.2:** State the **Principle of Least Privilege** in one
 sentence, and name one other place in a typical web application stack
 (outside of containers) where this principle is applied.
 
-> *Your answer:*
+> *Your answer:*Least privilege = minimal permissions
+Example = restricted database user (cannot do dangerous operations)
 
 ---
 
@@ -952,19 +967,22 @@ Section 6 of the lecture shows a Dockerfile that runs both PostgreSQL and
 FastAPI in a single container. Describe two concrete operational problems
 this causes in a production environment.
 
-> *Your answer:*
+> *Your answer:*No independent scaling → bad performance and wasted resources
+No independent restarts/updates → downtime and fragile deployments
 
 **Question B – Volume vs. Bind Mount:**  
 Compare named volumes and bind mounts. When is each type appropriate?
 
-> *Your answer:*
+> *Your answer:*Named volume = stable, safe, Docker‑managed → best for production data
+Bind mount = live editing, instant updates → best for development
 
 **Question C – Compose and Reproducibility:**  
 A colleague says: "I can just write the `docker run` commands in a shell
 script — why do I need `docker-compose.yml`?" Give two specific advantages
 of Compose over a shell script of `docker run` commands.
 
-> *Your answer:*
+> *Your answer:*Compose = one clean file → easy, reproducible setup
+Compose = automatic networks + dependencies → less manual work
 
 **Question D – The Complete Chain:**  
 You have now built and containerised the full stack: PostgreSQL in a
@@ -973,7 +991,12 @@ non-root image → both orchestrated by Docker Compose with credentials
 in `.env`. Describe in two sentences what each layer contributes to
 **portability** and **security**.
 
-> *Your answer:*
+> *Your answer:*PostgreSQL + named volume + init script:  
+Portable database setup; secure storage managed by Docker.
+FastAPI in slim non‑root image:  
+Portable small image; safer because it doesn’t run as root.
+Docker Compose + .env:  
+Portable multi‑service configuration; secrets kept out of the image for better security.
 
 ---
 
